@@ -43,9 +43,14 @@ app.get('/dataByMail/:mail', (req,res) => {
     const myData = fs.readFileSync(myFile);
     const myRes = JSON.parse(myData);   
     const myResId = myRes.find( (x) => {
-        return +x.celectronico === +myMail;
+        return x.celectronico === myMail;
     });
-    res.json(myResId);
+    // console.log(myResId);
+    if (myResId === undefined) {
+        console.log('siii')
+        res.json({});
+    }
+    res.json(myResId);            
 })
 
 app.post('/dataInsert', (req,res) => {
@@ -159,7 +164,7 @@ app.delete('/dataDelete/:id', (req,res) => {
 })
 
 app.listen(3000, ()=> {
-    console.log("Servidor cidenet API iniciado en puerto 3000");
+    console.log("Servidor leveltech API iniciado en puerto 3000");
 });
 	
      
